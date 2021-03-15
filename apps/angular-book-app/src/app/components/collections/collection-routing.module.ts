@@ -7,15 +7,12 @@ import { CollectionsComponent } from './collections.component';
 const routes: Routes = [
   {
     path: '',
-    component: CollectionsComponent
-  }
+    component: CollectionsComponent,
+  },
 ];
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    RouterModule.forChild( routes )
-  ]
+  imports: [CommonModule, RouterModule.forChild(routes)],
 })
-export class CollectionRoutingModule { }
+export class CollectionRoutingModule {}

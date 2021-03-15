@@ -7,11 +7,6 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CollectionsComponent],
-  imports: [
-    CommonModule,
-    CollectionRoutingModule,
-    FormsModule,
-    MaterialModule
-  ]
+  imports: [CommonModule, CollectionRoutingModule, FormsModule, MaterialModule],
 })
-export class CollectionModule { }
+export class CollectionModule {}

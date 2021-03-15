@@ -1,27 +1,41 @@
 <h2 class="collDetls-header">My Collections</h2>
 <div class="collection-list">
-    <mat-card class="noCollectionItems" *ngIf="!booksCollection.length">
-        No Books Added to Collection!
-    </mat-card>
+  <mat-card class="noCollectionItems" *ngIf="!booksCollection.length">
+    No Books Added to Collection!
+  </mat-card>
 </div>
 
 <div class="my-collections" *ngIf="booksCollection.length">
-    <div *ngFor="let bookDetails of booksCollection" class="collec-item">
-        <mat-card class="book-card">
-            <mat-card-header>
-            <mat-card-title>{{bookDetails.title}}</mat-card-title>
-            <img class="book-image" [src]="bookDetails.imageLink" alt="{{ bookDetails.title }}">
-            </mat-card-header>
-            <mat-card-content>
-            <p class="book-price"><b>Price:</b>{{bookDetails.price | currency}}</p>
-            <p><b>Written by:</b> {{bookDetails.authors}}</p>
-            <p><b>Publisher:</b> {{ bookDetails.publisher }}</p>
-            <p class="card-text">Delivery Details</p>
-            <p class="card-text"><b>Name:</b> {{ bookDetails.deliveryAddress.billingName }}</p>
-            <p class="card-text"><b>Email:</b> {{ bookDetails.deliveryAddress.billingEmail }}</p>
-            <p class="card-text"><b>Mobile:</b> {{ bookDetails.deliveryAddress.billingMobile }}</p>
-            <p class="card-text"><b>Address:</b> {{ bookDetails.deliveryAddress.billingAddress }}</p>
-            </mat-card-content>
-        </mat-card>
-    </div>
+  <div *ngFor="let bookDetails of booksCollection" class="collec-item">
+    <mat-card class="book-card">
+      <mat-card-header>
+        <mat-card-title>{{ bookDetails.title }}</mat-card-title>
+        <img
+          class="book-image"
+          [src]="bookDetails.imageLink"
+          alt="{{ bookDetails.title }}"
+        />
+      </mat-card-header>
+      <mat-card-content>
+        <p class="book-price">
+          <b>Price:</b>{{ bookDetails.price | currency }}
+        </p>
+        <p><b>Written by:</b> {{ bookDetails.authors }}</p>
+        <p><b>Publisher:</b> {{ bookDetails.publisher }}</p>
+        <p class="card-text">Delivery Details</p>
+        <p class="card-text">
+          <b>Name:</b> {{ bookDetails.deliveryAddress.billingName }}
+        </p>
+        <p class="card-text">
+          <b>Email:</b> {{ bookDetails.deliveryAddress.billingEmail }}
+        </p>
+        <p class="card-text">
+          <b>Mobile:</b> {{ bookDetails.deliveryAddress.billingMobile }}
+        </p>
+        <p class="card-text">
+          <b>Address:</b> {{ bookDetails.deliveryAddress.billingAddress }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

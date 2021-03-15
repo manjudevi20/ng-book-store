@@ -1,30 +1,36 @@
 <div>
-    <mat-sidenav-container class="example-sidenav-container">
-        <mat-sidenav mode="side" opened>
-            <mat-list class="sidenav-list">
-                <a routerLink="/" routerLinkActive="active">
-                    <mat-list-item>
-                    <a aria-hidden="false" aria-label="search icon"><mat-icon class="icons">search</mat-icon></a>Search
-                    </mat-list-item>
-                </a>
-                <mat-divider></mat-divider>
-                <a routerLink="/cart-items" routerLinkActive="active">
-                    <mat-list-item>
-                        <a aria-hidden="false" aria-label="cart icon"><mat-icon class="icons">add_shopping_cart</mat-icon></a>
-                        Cart
-                    </mat-list-item>
-                </a>
-                <mat-divider></mat-divider>
-                <a routerLink="/collections" routerLinkActive="active">
-                <mat-list-item>
-                    <a aria-hidden="false" aria-label="collections icon"><mat-icon class="icons">collections</mat-icon></a>
-                    My collection
-                </mat-list-item>
-                </a>
-                </mat-list>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav mode="side" opened>
+      <mat-list class="sidenav-list">
+        <a routerLink="/" routerLinkActive="active">
+          <mat-list-item>
+            <a aria-hidden="false" aria-label="search icon"
+              ><mat-icon class="icons">search</mat-icon></a
+            >Search
+          </mat-list-item>
+        </a>
+        <mat-divider></mat-divider>
+        <a routerLink="/cart-items" routerLinkActive="active">
+          <mat-list-item>
+            <a aria-hidden="false" aria-label="cart icon"
+              ><mat-icon class="icons">add_shopping_cart</mat-icon></a
+            >
+            Cart
+          </mat-list-item>
+        </a>
+        <mat-divider></mat-divider>
+        <a routerLink="/collections" routerLinkActive="active">
+          <mat-list-item>
+            <a aria-hidden="false" aria-label="collections icon"
+              ><mat-icon class="icons">collections</mat-icon></a
+            >
+            My collection
+          </mat-list-item>
+        </a>
+      </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

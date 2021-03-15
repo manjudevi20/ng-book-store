@@ -8,19 +8,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../../sharedModule/material.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule} from '../../sharedModule/shared.modue'
+import { SharedModule } from '../../sharedModule/shared.modue';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-
 
 import { StoreModule } from '@ngrx/store';
 import { reducerMapper } from '../../store/reducers/mapper';
 import { EffectsModule } from '@ngrx/effects';
 import { BooksEffects } from '../../store/effects/books.effects';
-import { AddToCollectionAction, AddMultipleToCollectionAction } from '../../store/actions/collections.actions';
+import {
+  AddToCollectionAction,
+  AddMultipleToCollectionAction,
+} from '../../store/actions/collections.actions';
 import { getSampleBook, mockBooks } from '../../test/test.helper';
 
 import { CollectionsComponent } from './collections.component';
-
 
 describe('CollectionsComponent', () => {
   let component: CollectionsComponent;
@@ -37,12 +38,11 @@ describe('CollectionsComponent', () => {
         MaterialModule,
         StoreModule.forRoot(reducerMapper),
         EffectsModule.forRoot([BooksEffects]),
-        SharedModule
+        SharedModule,
       ],
-      declarations: [ CollectionsComponent],
-      providers: [ { provide: APP_BASE_HREF, useValue: '/'} ]
-    })
-    .compileComponents()
+      declarations: [CollectionsComponent],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -56,12 +56,16 @@ describe('CollectionsComponent', () => {
   });
 
   test(`No items in collections`, () => {
-    expect( fixture.debugElement.query( By.css('.collectionItemsBlock') ) ).toBeFalsy();
+    expect(
+      fixture.debugElement.query(By.css('.collectionItemsBlock'))
+    ).toBeFalsy();
   });
 
   test(`should book in collection`, () => {
-    const collectionAction = new AddToCollectionAction( getSampleBook() );
-    component.getStoreRef().dispatch( collectionAction );
-    expect( fixture.debugElement.query( By.css('.collectionItemsBlock') ) ).toBeFalsy();
+    const collectionAction = new AddToCollectionAction(getSampleBook());
+    component.getStoreRef().dispatch(collectionAction);
+    expect(
+      fixture.debugElement.query(By.css('.collectionItemsBlock'))
+    ).toBeFalsy();
   });
 });

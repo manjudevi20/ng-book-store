@@ -9,30 +9,31 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'prokarma-collections',
   templateUrl: './collections.component.html',
-  styleUrls: ['./collections.component.scss']
+  styleUrls: ['./collections.component.scss'],
 })
 export class CollectionsComponent implements OnInit, OnDestroy {
   public booksCollection: Book[];
   private collectionSub: Subscription;
 
-  constructor(private store: Store<{CollectionState}>) { }
+  constructor(private store: Store<{ CollectionState }>) {}
 
   ngOnInit(): void {
     // fetching store collections
-    this.collectionSub = this.store.select( selectAllCollectionItems ).subscribe( ( collectionData ) => {
-      this.booksCollection = collectionData; 
-    });
+    this.collectionSub = this.store
+      .select(selectAllCollectionItems)
+      .subscribe((collectionData) => {
+        this.booksCollection = collectionData;
+      });
   }
 
-  getStoreRef():Store<{CollectionState}> {
+  getStoreRef(): Store<{ CollectionState }> {
     return this.store;
   }
 
   ngOnDestroy() {
     /* istanbul ignore else */
-    if( this.collectionSub ){
+    if (this.collectionSub) {
       this.collectionSub.unsubscribe();
     }
   }
-
 }
