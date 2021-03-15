@@ -1,0 +1,23 @@
+<h2 class="billing-info">Billing Details</h2>
+
+<div class="billing-form col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-xs-12">
+  <form class="example-form" [formGroup]="billingForm" (ngSubmit)="payNow()">
+    <mat-form-field appearance="fill" class="form-input-field">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-input-field">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-input-field">
+      <mat-label>Phone no</mat-label>
+      <input matInput formControlName="mobileNo" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-input-field">
+      <mat-label>Address</mat-label>
+      <textarea matInput formControlName="address"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Submit</button>
+  </form>
+</div>

@@ -1,0 +1,49 @@
+<div class="search-input-container">
+  <form class="example-form" [formGroup]="bookSearch" (ngSubmit)="getBooks()">
+    <span>
+      <input
+        type="text"
+        formControlName="bookName"
+        placeholder="Search."
+        class="search-input"
+      />&nbsp;
+      <button type="submit" [disabled]="bookSearch.invalid" class="searchBtn">
+        <mat-icon>search</mat-icon>
+      </button>
+    </span>
+  </form>
+</div>
+<p class="errMsg" *ngIf="errorMessage.length">{{ errorMessage }}</p>
+<div class="books-list row" *ngIf="booksList.length">
+  <div *ngFor="let book of booksList" class="book-item col-sm-12 col-md-12">
+    <mat-card class="book-card">
+      <mat-card-header>
+        <mat-card-title>{{ book.title }}</mat-card-title>
+        <!-- <mat-card-subtitle>The complete guide to angular</mat-card-subtitle> -->
+        <img
+          class="book-header-image"
+          [src]="book.imageLink"
+          alt="{{ book.title }}"
+        />
+        <!-- <div mat-card-avatar class="book-header-image"></div> -->
+      </mat-card-header>
+      <mat-card-content>
+        <p class="book-desciption">{{ book.description }}</p>
+        <p><b>Written by:</b></p>
+        <p>{{ book.authors }}</p>
+        <a routerLink="bookdetails/{{ book.id }}" class="btn btn-primary">
+          {{
+            collectionIds.includes(book.id)
+              ? 'In Collection'
+              : cartItemIds.indexOf(book.id) > -1
+              ? 'Added To Cart'
+              : 'View Details'
+          }}</a
+        >
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div *ngIf="!!recentSearchs && recentSearchs.length && !booksList.length">
+  <p class="noBooks">No books to show</p>
+</div>

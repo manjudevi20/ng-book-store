@@ -1,0 +1,49 @@
+<h2 class="cartDetls-header">Cart Details</h2>
+
+<div class="cart-list" *ngIf="cartDetails.length">
+  <div *ngFor="let bookDetails of cartDetails" class="cart-item">
+    <mat-card class="book-card">
+      <mat-card-header>
+        <mat-card-title>{{ bookDetails.title }}</mat-card-title>
+        <!-- <mat-card-subtitle>The complete guide to angular</mat-card-subtitle> -->
+        <img
+          class="book-image"
+          [src]="bookDetails.imageLink"
+          alt="{{ bookDetails.title }}"
+        />
+        <!-- <div mat-card-avatar class="book-header-image"></div> -->
+      </mat-card-header>
+      <mat-card-content>
+        <p class="book-price">
+          <b>Price:</b>{{ bookDetails.price | currency }}
+        </p>
+        <p><b>Written by:</b></p>
+        <p>{{ bookDetails.authors }}</p>
+        <!-- <a routerLink='bookdetails/{{ bookDetails.id }}' class="btn btn-primary"> {{ collectionIds.includes( book.id ) ? 'In Collection' : (cartItemIds.indexOf( book.id ) > -1 ? 'Added To Cart' : 'View Details') }}</a> -->
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- <button class="addToCart" mat-raised-button color="primary" (click)="addBookToCart()" [disabled]="itemBought || ( collectionIds.includes( bookDetails.id ) )"> {{ itemBought == true ? 'Added To Cart' : 'Add To Cart' }}</button> -->
+        <!-- <button class="buyNow" mat-raised-button color="accent" (click)="buyItem()" [disabled]="itemBought || ( collectionIds.includes( bookDetails.id ) )">Buy Now</button> -->
+        <button
+          class="removeBook"
+          mat-raised-button
+          (click)="removeBookFromCart(bookDetails.id)"
+        >
+          Remove
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<div *ngIf="cartDetails.length" class="paymentBlock">
+  <button mat-raised-button color="primary" (click)="payNow()">
+    Proceed to pay {{ cartValue | currency }}
+  </button>
+</div>
+
+<div class="cart-list">
+  <mat-card class="noCartItems" *ngIf="!cartDetails.length">
+    No Books Added to Cart!
+  </mat-card>
+</div>
