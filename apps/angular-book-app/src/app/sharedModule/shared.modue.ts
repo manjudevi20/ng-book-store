@@ -9,7 +9,6 @@ import { MaterialModule } from './material.module';
 import { BooksComponent } from '../components/books/books.component';
 import { BookDetailsComponent } from '../components/book-details/book-details.component';
 import { PageNotFoundComponent } from '../components/page-not-found/page-not-found.component';
-import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [BooksComponent, BookDetailsComponent, PageNotFoundComponent],

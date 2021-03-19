@@ -25,12 +25,7 @@ export class BooksComponent implements OnInit, OnDestroy {
   public recentSearchs: string[];
   public cartItemIds: string[] | number[];
   public collectionIds: string[] | number[];
-
-  private booksListSub: Subscription;
-  private booksFetchSub: Subscription;
-  private searchListSub: Subscription;
-  private cartSub: Subscription;
-  private collectionSub: Subscription;
+  private sub: Subscription[] = [];
 
   constructor(
     private store: Store<{
@@ -50,32 +45,37 @@ export class BooksComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.errorMessage = '';
-    this.booksListSub = this.store
+    this.sub.push(this.store
       .pipe(select(ReduceMappers.booksList))
       .subscribe((newBooksList: Book[]) => {
         this.booksList = newBooksList;
-      });
-    this.booksFetchSub = this.store
+      })
+    );
+    this.sub.push(this.store
       .select(ReduceMappers.apiError)
       .subscribe((errMessage) => {
         /* istanbul ignore else */
         if (errMessage != null) {
           this.errorMessage = 'Error in fetching books data';
         }
-      });
-    this.searchListSub = this.store
+      })
+    );
+    this.sub.push(this.store
       .select(ReduceMappers.searchList)
       .subscribe((searchList) => {
         this.recentSearchs = searchList;
-      });
-    this.cartSub = this.store.select(selectCartIds).subscribe((ids) => {
+      })
+    );
+    this.sub.push(this.store.select(selectCartIds).subscribe((ids) => {
       this.cartItemIds = ids;
-    });
-    this.collectionSub = this.store
+    })
+    );
+    this.sub.push(this.store
       .select(selectCollectionIds)
       .subscribe((ids) => {
         this.collectionIds = ids;
-      });
+      })
+    );
   }
 
   // function used to get the books searched by user
@@ -108,13 +108,6 @@ export class BooksComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    /* istanbul ignore else */
-    if (this.booksListSub) {
-      this.booksListSub.unsubscribe();
-      this.booksFetchSub.unsubscribe();
-      this.searchListSub.unsubscribe();
-      this.cartSub.unsubscribe();
-      this.collectionSub.unsubscribe();
-    }
+    this.sub.forEach(s => s.unsubscribe());
   }
 }

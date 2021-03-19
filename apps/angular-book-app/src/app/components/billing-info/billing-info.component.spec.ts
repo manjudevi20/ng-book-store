@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { reducerMapper } from '../../store/reducers/mapper';
@@ -19,9 +18,7 @@ import { getSampleBook } from '../../test/test.helper';
 import {
   RemoveAllBooksFromCartAction,
   AddBookToCartAction,
-  RemoveBookFromCartAction,
 } from '../../store/actions/cart.actions';
-import { AddMultipleToCollectionAction } from '../../store/actions/collections.actions';
 import { EffectsModule } from '@ngrx/effects';
 import { BooksEffects } from '../../store/effects/books.effects';
 
@@ -64,7 +61,6 @@ describe('BillingInfoComponent', () => {
   });
 
   test('should remove book from cart after billing success', () => {
-    // component.cartDetails = [];
     const sampleBook = getSampleBook();
     const cartAction = new RemoveAllBooksFromCartAction();
     component.getStoreObj().dispatch(cartAction);
@@ -74,7 +70,6 @@ describe('BillingInfoComponent', () => {
     const sampleBook = getSampleBook();
     const addToCartAction = new AddBookToCartAction(sampleBook);
     component.getStoreObj().dispatch(addToCartAction);
-    // expect( component.cartDetails).toBeTruthy();
     expect(fixture.debugElement.query(By.css('.billing-form'))).toBeTruthy();
   });
 });

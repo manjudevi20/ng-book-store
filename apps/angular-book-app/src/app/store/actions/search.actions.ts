@@ -16,7 +16,3 @@ export class AddToSearchListAction implements SearchAction {
 
   constructor(public newSearch: string) {}
 }
-
-// export class GetSearchListAction implements SearchAction {
-//     readonly type = SearchActionTypes.Get;
-// }

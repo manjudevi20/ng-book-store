@@ -19,8 +19,6 @@ export function cartReducer(state = initialState, action: CartAction) {
   switch (action.type) {
     case CartActionTypes.Add:
       return cartAdapter.addOne(action.bookObj, state);
-    // case CartActionTypes.AddMultiple:
-    //   return cartAdapter.addMany(action.booksObj, state);
     case CartActionTypes.Update:
       return cartAdapter.updateOne(
         {

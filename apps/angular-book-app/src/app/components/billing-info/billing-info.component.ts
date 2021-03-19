@@ -1,19 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 
-import {
-  RemoveBookFromCartAction,
-  RemoveAllBooksFromCartAction,
-} from '../../store/actions/cart.actions';
+import { RemoveAllBooksFromCartAction } from '../../store/actions/cart.actions';
 import { selectAllCartItems } from '../../store/reducers/cart.reducer';
 import { AddMultipleToCollectionAction } from '../../store/actions/collections.actions';
-// import { UpdateAddressAction } from '../../store/actions/address.actions';
 import { selectAllCollectionItems } from '../../store/reducers/collection.reducer';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -22,7 +17,6 @@ import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Book } from '../../interfaces/book/book';
 import { Address } from '../../interfaces/book/address';
-import { ReduceMappers } from '../../store/reducers/mapper';
 
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -39,8 +33,7 @@ export class BillingInfoComponent implements OnInit, OnDestroy {
 
   private clearCartDetails: boolean;
   private delivryAddress: Address;
-  private cartSub: Subscription;
-  private collectionSub: Subscription;
+  private sub: Subscription[] = [];
 
   constructor(
     private store: Store<{
@@ -48,7 +41,6 @@ export class BillingInfoComponent implements OnInit, OnDestroy {
       CollectionState;
       addressList: Address[];
     }>,
-    private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog
   ) {}
@@ -67,12 +59,13 @@ export class BillingInfoComponent implements OnInit, OnDestroy {
       ]),
       address: new FormControl('', Validators.required),
     });
-    this.cartSub = this.store
+    this.sub.push(this.store
       .select(selectAllCartItems)
       .subscribe((cartData) => {
         this.cartDetails = cartData;
-      });
-    this.collectionSub = this.store
+      })
+    );
+    this.sub.push(this.store
       .select(selectAllCollectionItems)
       .subscribe(() => {
         if (this.clearCartDetails === true) {
@@ -81,7 +74,8 @@ export class BillingInfoComponent implements OnInit, OnDestroy {
 
           this.clearCartDetails = false;
         }
-      });
+      })
+    );
   }
 
   payNow() {
@@ -107,9 +101,6 @@ export class BillingInfoComponent implements OnInit, OnDestroy {
     );
 
     this.store.dispatch(collectionAction);
-
-    // const updateAddressAction = new UpdateAddressAction( this.existingAddress );
-    // this.store.dispatch( updateAddressAction );
     this.router.navigate(['/collections']);
   }
 
@@ -118,7 +109,6 @@ export class BillingInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.cartSub.unsubscribe();
-    this.collectionSub.unsubscribe();
+    this.sub.forEach(s => s.unsubscribe());
   }
 }

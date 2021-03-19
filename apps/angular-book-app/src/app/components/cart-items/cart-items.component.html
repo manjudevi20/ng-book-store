@@ -11,7 +11,6 @@
           [src]="bookDetails.imageLink"
           alt="{{ bookDetails.title }}"
         />
-        <!-- <div mat-card-avatar class="book-header-image"></div> -->
       </mat-card-header>
       <mat-card-content>
         <p class="book-price">
@@ -19,11 +18,8 @@
         </p>
         <p><b>Written by:</b></p>
         <p>{{ bookDetails.authors }}</p>
-        <!-- <a routerLink='bookdetails/{{ bookDetails.id }}' class="btn btn-primary"> {{ collectionIds.includes( book.id ) ? 'In Collection' : (cartItemIds.indexOf( book.id ) > -1 ? 'Added To Cart' : 'View Details') }}</a> -->
       </mat-card-content>
       <mat-card-actions>
-        <!-- <button class="addToCart" mat-raised-button color="primary" (click)="addBookToCart()" [disabled]="itemBought || ( collectionIds.includes( bookDetails.id ) )"> {{ itemBought == true ? 'Added To Cart' : 'Add To Cart' }}</button> -->
-        <!-- <button class="buyNow" mat-raised-button color="accent" (click)="buyItem()" [disabled]="itemBought || ( collectionIds.includes( bookDetails.id ) )">Buy Now</button> -->
         <button
           class="removeBook"
           mat-raised-button

@@ -13,17 +13,17 @@ import { Subscription } from 'rxjs';
 })
 export class CollectionsComponent implements OnInit, OnDestroy {
   public booksCollection: Book[];
-  private collectionSub: Subscription;
-
+  private sub: Subscription[] = [];
   constructor(private store: Store<{ CollectionState }>) {}
 
   ngOnInit(): void {
     // fetching store collections
-    this.collectionSub = this.store
+    this.sub.push(this.store
       .select(selectAllCollectionItems)
       .subscribe((collectionData) => {
         this.booksCollection = collectionData;
-      });
+      })
+    );
   }
 
   getStoreRef(): Store<{ CollectionState }> {
@@ -31,9 +31,6 @@ export class CollectionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    /* istanbul ignore else */
-    if (this.collectionSub) {
-      this.collectionSub.unsubscribe();
-    }
+    this.sub.forEach(s => s.unsubscribe());
   }
 }

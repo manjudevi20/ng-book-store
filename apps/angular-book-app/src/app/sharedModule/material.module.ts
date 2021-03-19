@@ -9,11 +9,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
@@ -27,11 +22,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 
     MatListModule,
     MatIconModule,
-    MatToolbarModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatSelectModule,
-    MatSnackBarModule,
     MatDialogModule,
   ],
   exports: [
@@ -43,11 +33,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 
     MatListModule,
     MatIconModule,
-    MatToolbarModule,
-    MatProgressSpinnerModule,
-    MatMenuModule,
-    MatSelectModule,
-    MatSnackBarModule,
     MatDialogModule,
   ],
 })

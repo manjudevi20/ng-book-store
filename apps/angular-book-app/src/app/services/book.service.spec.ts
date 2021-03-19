@@ -4,10 +4,7 @@ import {
   HttpClientModule,
   HttpResponse,
 } from '@angular/common/http';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BookService } from './book.service';
 import { of } from 'rxjs';
 import { mockBooks } from '../test/test.helper';

@@ -19,13 +19,11 @@
     <mat-card class="book-card">
       <mat-card-header>
         <mat-card-title>{{ book.title }}</mat-card-title>
-        <!-- <mat-card-subtitle>The complete guide to angular</mat-card-subtitle> -->
         <img
           class="book-header-image"
           [src]="book.imageLink"
           alt="{{ book.title }}"
         />
-        <!-- <div mat-card-avatar class="book-header-image"></div> -->
       </mat-card-header>
       <mat-card-content>
         <p class="book-desciption">{{ book.description }}</p>

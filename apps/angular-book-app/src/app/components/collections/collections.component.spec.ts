@@ -9,16 +9,12 @@ import { MaterialModule } from '../../sharedModule/material.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../../sharedModule/shared.modue';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { StoreModule } from '@ngrx/store';
 import { reducerMapper } from '../../store/reducers/mapper';
 import { EffectsModule } from '@ngrx/effects';
 import { BooksEffects } from '../../store/effects/books.effects';
-import {
-  AddToCollectionAction,
-  AddMultipleToCollectionAction,
-} from '../../store/actions/collections.actions';
+import { AddToCollectionAction } from '../../store/actions/collections.actions';
 import { getSampleBook, mockBooks } from '../../test/test.helper';
 
 import { CollectionsComponent } from './collections.component';

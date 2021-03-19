@@ -14,10 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducerMapper } from '../../store/reducers/mapper';
 import { EffectsModule } from '@ngrx/effects';
 import { BooksEffects } from '../../store/effects/books.effects';
-import {
-  RemoveBookFromCartAction,
-  RemoveAllBooksFromCartAction,
-} from '../../store/actions/cart.actions';
+import { RemoveBookFromCartAction } from '../../store/actions/cart.actions';
 
 import { CartItemsComponent } from './cart-items.component';
 import { getSampleBook } from '../../test/test.helper';
@@ -25,7 +22,6 @@ import { getSampleBook } from '../../test/test.helper';
 describe('CartItemsComponent', () => {
   let component: CartItemsComponent;
   let fixture: ComponentFixture<CartItemsComponent>;
-  let book: any;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

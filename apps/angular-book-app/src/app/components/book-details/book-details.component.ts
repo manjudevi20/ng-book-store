@@ -24,10 +24,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   public bookDetails: Book;
   public itemBought: boolean;
   public collectionIds: string[] | number[];
-
-  private booksSub: Subscription;
-  private cartObjSub: Subscription;
-  private collectionSub: Subscription;
+  private sub: Subscription[] = [];
 
   constructor(
     private store: Store<{ booksList: Book[]; cartList: any }>,
@@ -37,21 +34,24 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.itemBought = false;
-    this.booksSub = this.store
+    this.sub.push(this.store
       .select(ReduceMappers.booksList)
       .subscribe((booksList) => {
         this.books = booksList;
-      });
-    this.cartObjSub = this.store
+      })
+    );
+    this.sub.push(this.store
       .select(ReduceMappers.cartList)
       .subscribe((cartList) => {
         this.cartList = cartList;
-      });
-    this.collectionSub = this.store
+      })
+    );
+    this.sub.push(this.store
       .select(selectCollectionIds)
       .subscribe((ids) => {
         this.collectionIds = ids;
-      });
+      })
+    );
 
     // Fetching Id from URL
     this.selectedBookId = this.route.snapshot.paramMap.get(
@@ -110,11 +110,6 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    /* istanbul ignore else */
-    if (this.booksSub) {
-      this.booksSub.unsubscribe();
-      this.cartObjSub.unsubscribe();
-      this.collectionSub.unsubscribe();
-    }
+    this.sub.forEach(s => s.unsubscribe());
   }
 }

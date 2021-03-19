@@ -77,6 +77,5 @@ describe('BooksComponent', () => {
     const errorAction = new APIErrorAction(errorRes);
     component.getStoreRef().dispatch(errorAction);
     fixture.debugElement.query(By.css('.searchBtn')).nativeElement.click();
-    // expect( component.errorMessage ).toBe('');
   });
 });

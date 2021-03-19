@@ -1,10 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import {
-  RemoveBookFromCartAction,
-  RemoveAllBooksFromCartAction,
-} from '../../store/actions/cart.actions';
+import { RemoveBookFromCartAction } from '../../store/actions/cart.actions';
 import { selectAllCartItems } from '../../store/reducers/cart.reducer';
 
 import { Subscription } from 'rxjs';
@@ -22,8 +19,7 @@ export class CartItemsComponent implements OnInit, OnDestroy {
   public cartValue: number;
 
   private clearCartDetails: boolean;
-  private cartSub: Subscription;
-  private collectionSub: Subscription;
+  private sub: Subscription[] = [];
 
   constructor(
     private store: Store<{
@@ -37,12 +33,13 @@ export class CartItemsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.clearCartDetails = false;
-    this.cartSub = this.store
+    this.sub.push(this.store
       .select(selectAllCartItems)
       .subscribe((cartData) => {
         this.cartDetails = cartData;
         this.calculateCartValue();
-      });
+      })
+    );
   }
 
   //remove book from cart
@@ -67,9 +64,6 @@ export class CartItemsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    /* istanbul ignore else */
-    if (this.cartSub) {
-      this.cartSub.unsubscribe();
-    }
+    this.sub.forEach(s => s.unsubscribe());
   }
 }
